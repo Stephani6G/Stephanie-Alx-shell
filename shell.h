@@ -31,18 +31,20 @@
 /*prototype for "  Betty would be proud" */
 int _putchar(char c);
 
-/*
- task 1 protypes
- * @shell_data: shell data
+/**
+ * struct shell_info - Data structure for shell information
+ *
+ * @read_fd: File descriptor for reading input
+ *
+ * This structure holds information related to the shell's operation.
  */
-typedef struct  shell_data
+typedef struct shell_info
 {
 	int read_fd;
-} shell_data_t;
+} shell_info_t;
 
-int checkInteractive(shell_data_t *shell_data);
-int isSeparator(char character, char *separators);
-int isAlpha(int c);
-int stringToInt(char *input);
-
+int is_interactive_shell(shell_info_t *shell_info);
+int is_separator(char c, char *separators);
+int is_alphabetical(int c);
+int string_to_int(char *str);
 #endif
