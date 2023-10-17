@@ -9,7 +9,7 @@
 * multiples of 5 with buzz, and
 * multiples of both 3 and 5 with fizzbuzz
 * Return: fizz , buzz or fizzbuzz
-* modulus 5 and modulus 3 are to come first to ensure no errors 
+* modulus 5 and modulus 3 are to come first to ensure no errors
 * any other way errrors will appear
 */
 
