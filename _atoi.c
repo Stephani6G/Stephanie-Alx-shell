@@ -1,75 +1,73 @@
 #include "shell.h"
 
-
 /**
- * checkInteractive - checks if shell is in interactive
- * @shell_data: pointer to shell data structure
+ * is_interactive_shell - Checks if the shell is in interactive mode
+ * @shell_info: Pointer to shell information structure
  *
- * Return: 1 if in interactive mode, 0 otherwise
+ * Return: (1) if in interactive mode, (0) otherwise
  */
 
-int checkInteractive(shell_data_t *shell_data)
+int is_interactive_shell(shell_info_t *shell_info)
 {
-	return (isatty(STDIN_FILENO) && shell_data->read_fd <= 2);
+	return (isatty(STDIN_FILENO) && shell_info->read_fd <= 2);
 }
 
 /**
- * isSeparator - checks if a character is a separator
- * @character: the character to check
- * @separators: the separator string
- *
- * Return: 1 if true, 0 if false
+ * is_separator - Checks if a character is a separator
+ * @c: The character to check
+ * @separators: The separator string
+ * Return: (1) if true, (0) if false
  */
-int isSeparator(char character, char *separators)
+int is_separator(char c, char *separators)
 {
 	while (*separators)
 	{
-		if (*separators++ == character)
+		if (*separators++ == c)
 		{
-			return 1;
+			return (1);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 /**
- * isAlpha - checks if a character is alphabetic
+ * is_alphabetical - Checks if a character is alphabetic
  * @c: The character to check
- *
- * Return: 1 if 'c' is an alphabetic character, 0 otherwise
+ * Return: (1) if 'c' is an alphabetic character, (0) otherwise
  */
-int isAlpha(int c)
+
+int is_alphabetical(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' and c <= 'Z'))
 	{
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 /**
- * stringToInt - converts a string to an integer
- * @input: the string to be converted
- *
+ * string_to_int - Converts a string to an integer
+ * @str: The string to be converted
  * Return: (0) if no numbers in the string, the converted number otherwise
  */
-int stringToInt(char *input)
-{
-	int index, sign = 1, flag = 0, output;
-	unsigned int result = 0;
 
-	for (index = 0; input[index] != '\0' && flag != 2; index++)
+int string_to_int(char *str)
+{
+	int index, sign = 1, flag = 0, result;
+	unsigned int output = 0;
+
+	for (index = 0; str[index] != '\0' && flag != 2; index++)
 	{
-		if (input[index] == '-')
+		if (str[index] == '-')
 		{
 			sign *= -1;
 		}
 
-		if (input[index] >= '0' && input[index] <= '9')
+		if (str[index] >= '0' && str[index] <= '9')
 		{
 			flag = 1;
-			result *= 10;
-			result += (input[index] - '0');
+			output *= 10;
+			output += (str[index] - '0');
 		}
 		else if (flag == 1)
 		{
@@ -79,13 +77,13 @@ int stringToInt(char *input)
 
 	if (sign == -1)
 	{
-		output = -result;
+		result = -output;
 	}
 	else
 	{
-		output = result;
+		result = output;
 	}
 
-	return (output);
+	return (result);
 }
 

@@ -31,9 +31,13 @@
 /*prototype for "  Betty would be proud" */
 int _putchar(char c);
 
-/*task 1 protypes */
-typedef struct shell_data {
-    int read_fd;
+/*
+ task 1 protypes
+ * @shell_data: shell data
+ */
+typedef struct  shell_data
+{
+	int read_fd;
 } shell_data_t;
 
 int checkInteractive(shell_data_t *shell_data);
