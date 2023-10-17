@@ -1,11 +1,13 @@
 #include "shell.h"
 
 /**
- * history_dis - Display History Of User Input Simple Shell
- * @c:Parsed Command
- * @s:Statue Of Last Excute
- * Return: 0 Succes -1 Fail
+ * history_dis - displays the history of the  user input
+ * @c:Parsed Command into the  shell
+ * @s:Statue Of Last Excution in the shell
+ *
+ * Return: 0 on Success -1  on Failure
  */
+
 int history_dis(__attribute__((unused))char **c, __attribute__((unused))int s)
 {
 	char *filename = ".simple_shell_history";
@@ -20,6 +22,7 @@ int history_dis(__attribute__((unused))char **c, __attribute__((unused))int s)
 	{
 		return (-1);
 	}
+
 	while ((getline(&line, &len, fp)) != -1)
 	{
 		counter++;
@@ -30,16 +33,19 @@ int history_dis(__attribute__((unused))char **c, __attribute__((unused))int s)
 		PRINTER(line);
 
 	}
+
 	if (line)
 		free(line);
 	fclose(fp);
 	return (0);
 }
+
 /**
- * print_echo - Excute Normal Echo
- * @cmd: Parsed Command
- * Return: 0 Succes -1 Fail
+ * print_echo - Excute  the normal echo command
+ * @cmd: Parsed Command into the shelll
+ * Return: 0 on Success -1 on faiuree
  */
+
 int print_echo(char **cmd)
 {
 	pid_t pid;
@@ -47,6 +53,7 @@ int print_echo(char **cmd)
 
 	pid = fork();
 	if (pid == 0)
+
 	{
 	if (execve("/bin/echo", cmd, environ) == -1)
 	{
@@ -54,15 +61,18 @@ int print_echo(char **cmd)
 	}
 		exit(EXIT_FAILURE);
 	}
+
 	else if (pid < 0)
 	{
 		return (-1);
 	}
+
 	else
 	{
 		do {
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
+
 	return (1);
 }
