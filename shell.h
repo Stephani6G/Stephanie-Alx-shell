@@ -31,9 +31,14 @@
 /*prototype for "  Betty would be proud" */
 int _putchar(char c);
 
-/* prototype for " 2. Simple shell 0.2" */
-void read_input(char* input);
-int parse_input(char* input, char* args[]);
+/*task 1 protypes */
+typedef struct shell_data {
+    int read_fd;
+} shell_data_t;
 
+int checkInteractive(shell_data_t *shell_data);
+int isSeparator(char character, char *separators);
+int isAlpha(int c);
+int stringToInt(char *input);
 
 #endif
