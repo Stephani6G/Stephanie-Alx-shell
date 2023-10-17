@@ -1,9 +1,12 @@
 #include "shell.h"
+#include <stdio.h>
+
 /**
- * history - Fill File By User Input
- * @input: User Input
- * Return: -1 Fail 0 Succes
+ * history - Fill file by usert in input
+ * @input: User Input to be read
+ * Return: -1 on failure 0 on success
  */
+
 int history(char *input)
 {
 	char *filename = ".simple_shell_history";
@@ -16,20 +19,25 @@ int history(char *input)
 	if (fd < 0)
 		return (-1);
 	if (input)
+
 	{
 		while (input[len])
 			len++;
 		w = write(fd, input, len);
+
 		if (w < 0)
 			return (-1);
 	}
 	return (1);
 }
+
 /**
- * free_env - Free Enviroment Variable Array
- * @env:  Environment variables.
- * Return: Void
+ * free_env - Free the enviroment variable arrayss
+ * @env:  Environment variables of the shell
+ * Return: Void success
+ * success
  */
+
 void free_env(char **env)
 {
 	int i;
