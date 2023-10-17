@@ -31,9 +31,20 @@
 /*prototype for "  Betty would be proud" */
 int _putchar(char c);
 
-/* prototype for " 2. Simple shell 0.2" */
-void read_input(char* input);
-int parse_input(char* input, char* args[]);
+/**
+ * struct shell_info - Data structure for shell information
+ *
+ * @read_fd: File descriptor for reading input
+ *
+ * This structure holds information related to the shell's operation.
+ */
+typedef struct shell_info
+{
+	int read_fd;
+} shell_info_t;
 
-
+int is_interactive_shell(shell_info_t *shell_info);
+int is_separator(char c, char *separators);
+int is_alphabetical(int c);
+int string_to_int(char *str);
 #endif
