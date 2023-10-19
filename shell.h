@@ -166,152 +166,119 @@ int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
-/* toem_errors1.c */
+/* Interactive mode */
+int interactive(info_t *);
+
+/* Check if character is a delimiter */
+int is_delim(char, char *);
+
+/* Check if a character is alphabetical */
+int _isalpha(int);
+
+/* Convert a string to an integer */
+int _atoi(char *);
+
+/* Convert string to an integer with error handling */
 int _erratoi(char *);
+
+/* Print an error message */
 void print_error(info_t *, char *);
+
+/* Print integers with specified format */
 int print_d(int, int);
+
+/* Convert a long integer to a string */
 char *convert_number(long int, int, int);
+
+/* Remove comments from a string */
 void remove_comments(char *);
 
-/* _myexit - Exit the shell
- * This function is used to exit the shell gracefully.
- */
-int _myexit(info_t *info);
-/* _mycd - Change the current directory
- * This function is used to change the current working directory.
- */
-int _mycd(info_t *info);
-/* _myhelp - Display shell help information
- * This function displays help information about the shell and its commands.
- */
-int _myhelp(info_t *info);
+/* Exit shell */
+int _myexit(info_t *);
 
+/* Change current directory */
+int _mycd(info_t *);
 
+/* Display shell help information */
+int _myhelp(info_t *);
 
-/* _myhistory - Display command history
- * This function displays the command history from the info_t structure.
- */
-int _myhistory(info_t *info);
-/* _myalias - Display alias information
- * This function displays alias information stored in the info_t structure.
- */
-int _myalias(info_t *info);
+/* Display command history */
+int _myhistory(info_t *);
 
+/* Display alias information */
+int _myalias(info_t *);
 
+/* Get user input and process it */
+ssize_t get_input(info_t *);
 
-/* get_input - Get user input and process it
- * This function retrieves user input, processes it, and updates the info_t structure accordingly.
- */
-ssize_t get_input(info_t *info);
-/* _getline - Get a line of input from the user
- * This function reads a line of input from the user and stores it in the provided buffer.
- */
-int _getline(info_t *info, char **line, size_t *n);
-/* sigintHandler - Handle the SIGINT signal
- * This function is a signal handler for the SIGINT signal (Ctrl+C).
- */
-void sigintHandler(int signo);
+/* Get a line of input from the user */
+int _getline(info_t *, char **, size_t *);
 
+/* Handle SIGINT signal (Ctrl+C) */
+void sigintHandler(int);
 
-/* clear_info - Clear the content of an info_t structure
- * This function clears the content of the specified info_t structure.
- */
-void clear_info(info_t *info);
-/* set_info - Set the content of an info_t structure
- * This function sets the content of the info_t structure, including the environment variables.
- */
-void set_info(info_t *info, char **environ);
-/* free_info - Free the memory of an info_t structure
- * This function frees the memory of the specified info_t structure and its environment variables.
- */
-void free_info(info_t *info, int free_environ);
+/* Clear info_t structure */
+void clear_info(info_t *);
 
+/* Set info_t structure */
+void set_info(info_t *, char **);
 
+/* Free info_t structure */
+void free_info(info_t *, int);
 
+/* Get environment variable */
+char *_getenv(info_t *, const char *);
 
+/* Display environment variables */
+int _myenv(info_t *);
 
-/* _getenv - Get the value of an environment variable
- * This function retrieves the value of the specified environment variable.
- */
-char *_getenv(info_t *info, const char *name);
-/* _myenv - Display the environment variables
- * This function displays the environment variables contained in the info_t structure.
- */
-int _myenv(info_t *info);
-/* _mysetenv - Set an environment variable
- * This function allows setting or modifying environment variables using the info_t structure.
- */
-int _mysetenv(info_t *info);
-/* _myunsetenv - Unset an environment variable
- * This function allows unsetting (removing) environment variables using the info_t structure.
- */
-int _myunsetenv(info_t *info);
-/* populate_env_list - Populate an environment list from the system's environment
- * This function creates an environment list in the info_t structure based on the system's environment.
- */
-int populate_env_list(info_t *info);
+/* Set environment variable */
+int _mysetenv(info_t *);
 
+/* Unset environment variable */
+int _myunsetenv(info_t *);
 
+/* Populate environment list */
+int populate_env_list(info_t *);
 
+/* Get environment variables as array */
+char **get_environ(info_t *);
 
-/* get_environ - Get the environment variables as an array of strings
- * This function retrieves the environment variables as an array of strings.
- */
-char **get_environ(info_t *info);
-/* _unsetenv - Unset an environment variable
- * This function unsets (removes) the specified environment variable.
- */
-int _unsetenv(info_t *info, char *name);
-/* _setenv - Set or modify an environment variable
- * This function sets or modifies the specified environment variable to the given value.
- */
-int _setenv(info_t *info, char *name, char *value);
+/* Unset environment variable */
+int _unsetenv(info_t *, char *);
 
+/* Set or modify environment variable */
+int _setenv(info_t *, char *, char *);
 
-
-/* get_history_file - Get the history file path
- * This function returns the path to the history file associated with the info_t structure.
- */
+/* Get history file path */
 char *get_history_file(info_t *info);
-/* write_history - Write history data to a file
- * This function writes the history data from the info_t structure to a file.
- */
+
+/* Write history data to a file */
 int write_history(info_t *info);
-/* read_history - Read history data from a file
- * This function reads history data from a file and populates the info_t structure with it.
- */
+
+/* Read history data from a file */
 int read_history(info_t *info);
-/* build_history_list - Build a history list from a buffer
- * This function constructs a history list from the provided buffer and updates the info_t structure.
- */
+
+/* Build a history list from a buffer */
 int build_history_list(info_t *info, char *buf, int linecount);
-/* renumber_history - Renumber history entries
- * This function renumbers history entries to ensure they are sequential.
- */
+
+/* Renumber history entries */
 int renumber_history(info_t *info);
 
+/* Add a node to a linked list */
+list_t *add_node(list_t **, const char *, int);
 
+/* Add a node to the end of a linked list */
+list_t *add_node_end(list_t **, const char *, int);
 
+/* Print a linked list of strings */
+size_t print_list_str(const list_t *);
 
-/* add_node - Add a new node at the beginning of a linked list
- * This function adds a new node with the specified string and length at the beginning of the linked list.
- */
-list_t *add_node(list_t **head, const char *str, int len);
-/* add_node_end - Add a new node at the end of a linked list
- * This function adds a new node with the specified string and length at the end of the linked list.
- */
-list_t *add_node_end(list_t **head, const char *str, int len);
+/* Delete a node at a specified index in a linked list */
+int delete_node_at_index(list_t **, unsigned int);
 
-size_t print_list_str(const list_t *h);
-/* delete_node_at_index - Delete a node at a specified index in a linked list
- * This function deletes the node at the specified index in the linked list.
- */
-int delete_node_at_index(list_t **head, unsigned int index);
-/* free_list - Free the memory of a linked list and its nodes
- * This function frees the memory allocated for the linked list and all of its nodes.
- */
-void free_list(list_t **head);
-
+/* Free the memory of a linked list */
+void free_list(list_t **);
 
 
 /* list_len - Get the length of a linked list
@@ -325,10 +292,12 @@ size_t list_len(const list_t *list);
 char **list_to_strings(list_t *list);
 
 /* print_list - Print the elements of a linked list
+ * This function prints the elements of the linked list to the standard output.
  */
 size_t print_list(const list_t *list);
 
 /* node_starts_with - Find the first node that starts with a given character
+ * This function searches for the first node in the list that starts with the specified character or string.
  */
 list_t *node_starts_with(list_t *list, char *str, char c);
 

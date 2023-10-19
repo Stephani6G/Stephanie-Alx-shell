@@ -1,0 +1,26 @@
+#include "shell.h"
+
+while True:
+    # Get user input
+    user_input = input("$ ")
+
+    # Split the input into command and arguments
+    parts = user_input.split()
+    command = parts[0]
+    arguments = parts[1:]
+
+    # Check for exit command
+    if command == "exit":
+        break
+
+    try:
+        # Execute the command
+        if os.name == 'nt':
+            # For Windows
+            os.system(user_input)
+        else:
+            # For Unix-like systems
+            os.system(f"{command} {' '.join(arguments)}")
+    except Exception as e:
+        print(f"Error: {e}")
+
