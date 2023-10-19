@@ -1,7 +1,5 @@
 #include "shell.h"
 
-
-
 /**
  * hsh - main shell loop
  * @info: the parameter & return info struct
@@ -9,7 +7,6 @@
  *
  * Return: 0 on success, 1 on error, or error code
  */
-
 int hsh(info_t *info, char **av)
 {
 	ssize_t r = 0;
@@ -33,7 +30,6 @@ int hsh(info_t *info, char **av)
 			_putchar('\n');
 		free_info(info, 0);
 	}
-
 	write_history(info);
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
@@ -48,7 +44,7 @@ int hsh(info_t *info, char **av)
 }
 
 /**
- * find_builtin -  function that finds a builtin command
+ * find_builtin - finds a builtin command
  * @info: the parameter & return info struct
  *
  * Return: -1 if builtin not found,
@@ -56,7 +52,6 @@ int hsh(info_t *info, char **av)
  *			1 if builtin found but not successful,
  *			-2 if builtin signals exit()
  */
-
 int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
@@ -83,12 +78,11 @@ int find_builtin(info_t *info)
 }
 
 /**
- * find_cmd - function that finds a command in PATH
+ * find_cmd - finds a command in PATH
  * @info: the parameter & return info struct
  *
- * Return: void success
+ * Return: void
  */
-
 void find_cmd(info_t *info)
 {
 	char *path = NULL;
@@ -100,7 +94,6 @@ void find_cmd(info_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-
 	for (i = 0, k = 0; info->arg[i]; i++)
 		if (!is_delim(info->arg[i], " \t\n"))
 			k++;
@@ -108,13 +101,11 @@ void find_cmd(info_t *info)
 		return;
 
 	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
-
 	if (path)
 	{
 		info->path = path;
 		fork_cmd(info);
 	}
-
 	else
 	{
 		if ((interactive(info) || _getenv(info, "PATH=")
@@ -129,13 +120,11 @@ void find_cmd(info_t *info)
 }
 
 /**
- * fork_cmd -  function forks a an exec thread to run cmd
- *
+ * fork_cmd - forks a an exec thread to run cmd
  * @info: the parameter & return info struct
  *
- * Return: void success
+ * Return: void
  */
-
 void fork_cmd(info_t *info)
 {
 	pid_t child_pid;
@@ -143,6 +132,7 @@ void fork_cmd(info_t *info)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
+		/* TODO: PUT ERROR FUNCTION */
 		perror("Error:");
 		return;
 	}
@@ -155,6 +145,7 @@ void fork_cmd(info_t *info)
 				exit(126);
 			exit(1);
 		}
+		/* TODO: PUT ERROR FUNCTION */
 	}
 	else
 	{
